@@ -12,7 +12,7 @@ export class HeroeCardComponent implements OnInit {
 
   @Input() heroe!: Heroe;
 
-  constructor(private router: Router) { }
+  constructor() { }
 
   ngOnInit(): void {
   }

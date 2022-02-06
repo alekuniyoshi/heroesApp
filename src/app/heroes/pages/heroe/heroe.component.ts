@@ -13,6 +13,10 @@ import { HeroesService } from '../../services/heroes.service';
     mat-card {
       margin-top: 20px
     }
+    img {
+      width: 100%;
+      border-radius:5px;
+    }
   `
   ]
 })
