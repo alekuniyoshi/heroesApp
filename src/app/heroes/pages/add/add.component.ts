@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogActions } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
+import { ConfirmComponent } from '../../components/confirm/confirm.component';
 import { Heroe, Publisher } from '../../interfaces/heroe.interface';
 import { HeroesService } from '../../services/heroes.service';
 
@@ -29,7 +32,8 @@ export class AddComponent implements OnInit {
     characters: ''
   }
 
-  constructor(private heroeService: HeroesService, private activatedRoute: ActivatedRoute, private route: Router) { }
+  constructor(private heroeService: HeroesService, private activatedRoute: ActivatedRoute,
+    private route: Router, private snackBar: MatSnackBar, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     if (!this.route.url.includes('update')) {
@@ -44,12 +48,36 @@ export class AddComponent implements OnInit {
     }
     if (this.heroe.id) {
       return this.heroeService.editHeroe(this.heroe).subscribe(heroe => {
-        this.route.navigate(['/heroes/view', heroe.id])
+        this.showSnackBar('Hereo modifided');
+        this.route.navigate(['/heroes/view', heroe.id]);
       });
     }
     return this.heroeService.addHeroe(this.heroe).subscribe(heroe => {
-      this.route.navigate(['/heroes/update', heroe.id]);
+      this.showSnackBar('Hereo added');
+      this.route.navigate(['/heroes/view', heroe.id]);
     });
   }
 
+
+  delete() {
+    if (this.heroe.id) {
+      const id = this.heroe.id;
+      const dialog = this.dialog.open(ConfirmComponent, { width: '250px', data: this.heroe });
+      dialog.afterClosed().subscribe((result) => {
+        if (result) {
+          return this.heroeService.deleteHeroe(id).subscribe(value => {
+            this.showSnackBar('Hereo deleted');
+            this.route.navigate(['heroes/list'])
+          });
+        } else {
+          return;
+        }
+      });
+    }
+    return;
+  }
+
+  showSnackBar(messsage: string) {
+    this.snackBar.open(messsage, 'Close', { duration: 2500 });
+  }
 }

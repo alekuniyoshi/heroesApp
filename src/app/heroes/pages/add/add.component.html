@@ -1,36 +1,35 @@
-<h1>New Heroe <small>{{heroe.superhero}}</small></h1>
+<h1>{{(heroe.id)? 'Edit':'New'}} Heroe <small>{{heroe.superhero}}</small></h1>
 
 <div fxLayout="row" fxLayoutGap="40px" fxLayout.xs="columns">
 
-  <div fxFlex="50" fxLayout="column">
+  <div fxFlex="50" fxLayout="column" fxFlexFill>
 
     <div fxLayout="row" fxLayoutGap="2px" fxLayout.xs="columns">
 
       <mat-form-filed fxFlex="100">
-        <mat-label>Super Heroe</mat-label>
+        <mat-label fxFlex="40">Super Heroe</mat-label>
         <input matInput type="text" [(ngModel)]="heroe.superhero" required>
       </mat-form-filed>
 
       <mat-form-filed fxFlex="100">
-        <mat-label>Alter Ego</mat-label>
+        <mat-label fxFlex="40">Alter Ego</mat-label>
         <input matInput type="text" [(ngModel)]="heroe.alter_ego" required>
       </mat-form-filed>
-
     </div>
 
     <mat-form-filed fxFlex="100">
-      <mat-label>Firts Aparation</mat-label>
+      <mat-label fxFlex="20">Firts Aparation</mat-label>
       <input matInput type="text" [(ngModel)]="heroe.first_appearance" required>
     </mat-form-filed>
 
     <mat-form-filed fxFlex="100">
-      <mat-label>Characters</mat-label>
+      <mat-label fxFlex="20">Characters</mat-label>
       <input matInput type="text" [(ngModel)]="heroe.characters" required>
     </mat-form-filed>
 
     <mat-form-filed fxFlex="100">
       <mat-label>Characters</mat-label>
-      <mat-select [(ngModel)]="heroe.publisher" required>
+      <mat-select fxFlex="40" [(ngModel)]="heroe.publisher" required>
         <mat-option *ngFor=" let publisher of publishers" [value]="publisher.id">
           {{publisher.desc}}
         </mat-option>
@@ -38,15 +37,20 @@
     </mat-form-filed>
 
     <mat-form-filed fxFlex="100">
-      <mat-label>Image url</mat-label>
+      <mat-label fxFlex="20">Image url</mat-label>
       <input matInput type="url" [(ngModel)]="heroe.alt_img" required>
     </mat-form-filed>
     <br>
 
-    <button mat-raised-button color="primary" (click)="save()">
-      <mat-icon>edit</mat-icon>
-      Save
-    </button>
+    <div fxlayout="row">
+      <button mat-raised-button color="primary" (click)="save()">
+        <mat-icon>edit</mat-icon>
+        {{(heroe.id)? 'Update':'Save'}}
+      </button>
+      <button *ngIf="heroe.id" mat-raised-button color="secundary" (click)="delete()" style="margin-left: 40%;">
+        Delete
+      </button>
+    </div>
   </div>
 
 
