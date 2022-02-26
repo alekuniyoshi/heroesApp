@@ -9,7 +9,7 @@ import { Heroe } from '../../interfaces/heroe.interface';
 })
 export class ConfirmComponent implements OnInit {
 
-  constructor(private dialogRef: MatDialogRef<ConfirmComponent>,@Inject(MAT_DIALOG_DATA) public data: Heroe) { }
+  constructor(private dialogRef: MatDialogRef<ConfirmComponent>, @Inject(MAT_DIALOG_DATA) public data: Heroe) { }
 
   ngOnInit(): void {
   }
