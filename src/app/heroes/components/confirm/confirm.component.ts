@@ -1,4 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Heroe } from '../../interfaces/heroe.interface';
 
@@ -9,7 +11,8 @@ import { Heroe } from '../../interfaces/heroe.interface';
 })
 export class ConfirmComponent implements OnInit {
 
-  constructor(private dialogRef: MatDialogRef<ConfirmComponent>, @Inject(MAT_DIALOG_DATA) public data: Heroe) { }
+  constructor(private dialogRef: MatDialogRef<ConfirmComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: Heroe) { }
 
   ngOnInit(): void {
   }
@@ -21,5 +24,7 @@ export class ConfirmComponent implements OnInit {
   close() {
     this.dialogRef.close();
   }
+
+ 
 
 }

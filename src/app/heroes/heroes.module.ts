@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HeroesRoutingModule } from './heroes-routing.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from '../material/material.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 import { AddComponent } from './pages/add/add.component';
@@ -35,7 +35,9 @@ import { ConfirmComponent } from './components/confirm/confirm.component';
     HeroesRoutingModule,
     FlexLayoutModule,
     MaterialModule,
-    FormsModule
+    FormsModule,
+
+
   ]
 })
 export class HeroesModule { }
