@@ -19,9 +19,8 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-
-  login() {
-    return this.http.get<Auth>(`${this.baseUrl}/usuarios/1`).pipe(
+  login(email: string,password : string) {
+    return this.http.get<Auth>(`${this.baseUrl}/usuarios/?email=${email}&password=${password}`).pipe(
       tap(auth => this._auth = auth),
       tap(auth => localStorage.setItem('token', auth.id))
     );
@@ -36,7 +35,7 @@ export class AuthService {
       return of(false);
     }
 
-    return this.http.get<Auth>(`${this.baseUrl}/usuarios/1`).pipe(
+    return this.http.get<Auth>(`${this.baseUrl}/usuarios/`).pipe(
       map(auth => {
         console.log('map', auth);
         this._auth = auth;
