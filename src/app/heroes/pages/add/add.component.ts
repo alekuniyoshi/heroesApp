@@ -39,7 +39,10 @@ export class AddComponent implements OnInit {
     if (!this.route.url.includes('update')) {
       return;
     }
-    this.activatedRoute.params.pipe(switchMap(({ id }) => this.heroeService.getHeroeById(id))).subscribe(heroe => this.heroe = heroe);
+    this.activatedRoute.params.pipe(
+      switchMap(
+        ({ id }) => this.heroeService.getHeroeById(id)))
+      .subscribe(heroe => this.heroe = heroe);
   }
 
   save() {

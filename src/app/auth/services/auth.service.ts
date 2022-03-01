@@ -19,14 +19,12 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  login(email: string,password : string) {
-    return this.http.get<Auth>(`${this.baseUrl}/usuarios/?email=${email}&password=${password}`).pipe(
-      tap(auth => this._auth = auth),
-      tap(auth => localStorage.setItem('token', auth.id))
-    );
+  login(email: string, password: string): Observable<Auth> {
+    return this.http.get<Auth>(this.baseUrl +`/usuarios?email=${email}&password=${password}`);
   }
 
   logout() {
+    localStorage.removeItem('token');
     this._auth = undefined;
   }
 
@@ -35,13 +33,17 @@ export class AuthService {
       return of(false);
     }
 
-    return this.http.get<Auth>(`${this.baseUrl}/usuarios/`).pipe(
+    return this.http.get<Auth>(this.baseUrl + `/usuarios/`).pipe(
       map(auth => {
         console.log('map', auth);
         this._auth = auth;
         return true;
       })
     );
+  }
+
+  getUsuarioById(id:string): Observable<Auth> {
+    return this.http.get<Auth>(this.baseUrl +`/usuarios/${id}`);
   }
 
 }

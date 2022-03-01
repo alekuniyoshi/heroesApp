@@ -28,7 +28,10 @@
     </button>
     <span class="spacer"></span>
 
+
+    <ng-container *ngIf="auth">
     <span>{{auth.usuario}}</span>
+  </ng-container>
 
     <button mat-button (click)="logout()">
       Logout
